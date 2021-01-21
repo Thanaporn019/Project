@@ -10,7 +10,9 @@ import AspNetData from 'devextreme-aspnet-data-nojquery';
 import Select from 'react-select'
 import _ from "lodash";
 
-let projectList = []
+import { Card, Select } from "antd";
+const Option = Select.Option;
+
 let data = [{
     projectId: null,
     typeId: null,
@@ -21,6 +23,12 @@ let data = [{
     workTimeIn: null,
     workTimeOut: null,
 }]
+
+let projectList = [];
+let typeList = [];
+let timeHours = [];
+let timeMin = [];
+
 class ActionsWork extends React.Component {
     constructor(props) {
         console.log("ActionsWork -> constructor -> props", props)
@@ -42,48 +50,73 @@ class ActionsWork extends React.Component {
     }
 
     componentDidMount() {
-        
+
         console.log("ActionsWork -> componentDidMount -> s", this.state.data)
         this.getProjectList()
         this.getJobtypeList()
+        this.setDdlTime()
     }
 
     getProjectList() {
-            this.projectList = [{
-                label: '001',
-            },
-            {
-                label: '002',
-            }]
-        this.setState({
-            projectList: [{
-                projectId: '001',
-                projectName: 'test1'
-            },
-            {
-                projectId: '002',
-                projectName: 'test2'
-            }]
-        })
+        let resData = [{
+            projectId: '001',
+            projectName: 'test1'
+        },
+        {
+            projectId: '002',
+            projectName: 'test2'
+        }]
+        for (let i = 0; i < resData.length; i++) {
+            this.projectList.push(<Option key={resData[i].projectId}>{resData[i].projectName}</Option>);
+        }
+
+        // this.projectList = [{
+        //     label: '001',
+        // },
+        // {
+        //     label: '002',
+        // }]
+        // this.setState({
+        //     projectList: [{
+        //         projectId: '001',
+        //         projectName: 'test1'
+        //     },
+        //     {
+        //         projectId: '002',
+        //         projectName: 'test2'
+        //     }]
+        // })
     }
 
     getJobtypeList() {
-        this.setState({
-            jobtypeList: [{
-                typeId: '001',
-                typeName: 'test1'
-            },
-            {
-                typeId: '002',
-                typeName: 'test2'
-            }]
-        })
+        // this.setState({
+        //     jobtypeList: [{
+        //         typeId: '001',
+        //         typeName: 'test1'
+        //     },
+        //     {
+        //         typeId: '002',
+        //         typeName: 'test2'
+        //     }]
+        // })
         console.log("Work -> getJobtypeList -> this.state.jobtypeList", this.state.jobtypeList)
+
+        let resData = [{
+            typeId: '001',
+            typeName: 'test1'
+        },
+        {
+            typeId: '002',
+            typeName: 'test2'
+        }]
+        for (let i = 0; i < resData.length; i++) {
+            this.typeList.push(<Option key={resData[i].typeId}>{resData[i].typeName}</Option>);
+        }
     }
 
-    handleProjectChange = (value , i) => {
-    console.log("ActionsWork -> handleProjectChange -> i", i)
-    console.log("ActionsWork -> handleProjectChange -> value", value)
+    handleProjectChange = (value, i) => {
+        console.log("ActionsWork -> handleProjectChange -> i", i)
+        console.log("ActionsWork -> handleProjectChange -> value", value)
 
         // let temp = _.cloneDeep(this.state.filter)
         // temp.projectId = value
@@ -109,6 +142,33 @@ class ActionsWork extends React.Component {
             }
         });
     }
+
+    setDdlTime() {
+        let maxMin = 60;
+        let maxHours = 24;
+
+        for (let i = 0; i < maxHours; i++) {
+            const element = array[i];
+            this.timeHours.push()
+        }
+
+        // timeHours
+        // timeMin
+    }
+
+    // TODO :: Select
+
+    // handleChange = (value) => {
+    //     console.log(`selected ${value}`);
+    // }
+
+    // handleBlur = () => {
+    //     console.log('blur');
+    // }
+
+    // handleFocus = () => {
+    //     console.log('focus');
+    // }
 
     render() {
 
@@ -146,20 +206,20 @@ class ActionsWork extends React.Component {
                                     </div>
 
                                     {this.state.data.map((data, i) => {
-                                    console.log("ActionsWork -> render -> data", data)
+                                        console.log("ActionsWork -> render -> data", data)
                                         console.log("ActionsWork -> render -> i", i);
                                         return (
                                             <>
-                                            <div className="box-action-content">
-                                            <div className="row form-group">
-                                                <div className="col-4" style={{ textAlign: 'right' }}><label for="ddlProjectName">Project Name</label></div>
-                                                <Select className=" col-7"
-                                                    options={this.projectList}
-                                                    value={data.projectId}
-                                                    onChange={value => { this.handleProjectChange(value, i) }}
-                                                    defaultValue={{ label: "-- Please selete project --", value: null }}
-                                                />
-                                                {/* <select class="form-control col-7" id="ddlProjectName" value={data.projectId} onChange={(e) => { this.handleProjectChange(e, i) }}>
+                                                <div className="box-action-content">
+                                                    <div className="row form-group">
+                                                        <div className="col-4" style={{ textAlign: 'right' }}><label for="ddlProjectName">Project Name</label></div>
+                                                        <Select className=" col-7"
+                                                            options={this.projectList}
+                                                            value={data.projectId}
+                                                            onChange={value => { this.handleProjectChange(value, i) }}
+                                                            defaultValue={{ label: "-- Please selete project --", value: null }}
+                                                        />
+                                                        {/* <select class="form-control col-7" id="ddlProjectName" value={data.projectId} onChange={(e) => { this.handleProjectChange(e, i) }}>
                                                     {
                                                         this.state.projectList.map(r => {
                                                             console.log(r, r.projectId == data.projectId)
@@ -168,23 +228,72 @@ class ActionsWork extends React.Component {
                                                         })
                                                     }
                                                 </select> */}
-                                            </div>
-                                            <div className="row form-group">
-                                                <div className="col-4" style={{ textAlign: 'right' }}><label for="ddlJobType">Job Type</label></div>
-                                                <select class="form-control col-7" id="ddlJobType" value={data.typeId} onChange={(e) => { this.handleTypeChange(e, i) }}>
-                                                    {
-                                                        this.state.jobtypeList.map(r => {
-                                                            console.log("Work -> render -> r", r)
-                                                            return <option value={r.typeId} selected={r.typeId == data.typeId}>{r.typeName}</option>
-                                                        })
-                                                    }
-                                                </select>
-                                            </div>
-                                        </div>
+
+                                                        {/* <Select
+                                                            showSearch
+                                                            style={{ width: 200 }}
+                                                            placeholder="Please selete project"
+                                                            optionFilterProp="children"
+                                                            onChange={handleChange}
+                                                            onFocus={handleFocus}
+                                                            onBlur={handleBlur}
+                                                            filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                                                        value={data.projectId}
+                                                            >
+                                                           {this.projectList}
+                                                        </Select> */}
+                                                    </div>
+                                                    <div className="row form-group">
+                                                        <div className="col-4" style={{ textAlign: 'right' }}><label for="ddlJobType">Job Type</label></div>
+                                                        <select class="form-control col-7" id="ddlJobType" value={data.typeId} onChange={(e) => { this.handleTypeChange(e, i) }}>
+                                                            {
+                                                                this.state.jobtypeList.map(r => {
+                                                                    console.log("Work -> render -> r", r)
+                                                                    return <option value={r.typeId} selected={r.typeId == data.typeId}>{r.typeName}</option>
+                                                                })
+                                                            }
+
+                                                            {/* <Select
+                                                            showSearch
+                                                            style={{ width: 200 }}
+                                                            placeholder="Please selete Type"
+                                                            optionFilterProp="children"
+                                                            onChange={handleChange}
+                                                            onFocus={handleFocus}
+                                                            onBlur={handleBlur}
+                                                            filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                                                        value={data.typeId}
+                                                            >
+                                                           {this.typeList}
+                                                        </Select> */}
+                                                        </select>
+                                                    </div>
+
+                                                    {/* WorkIn */}
+                                                    <div className="row form-group">
+                                                        <div className="col-4" style={{ textAlign: 'right' }}><label for="ddlJobType">Job Type</label></div>
+
+                                                        {/* <Select
+                                                            showSearch
+                                                            style={{ width: 200 }}
+                                                            placeholder="Please selete Type"
+                                                            optionFilterProp="children"
+                                                            onChange={handleChange}
+                                                            onFocus={handleFocus}
+                                                            onBlur={handleBlur}
+                                                            filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                                                        value={data.typeId}
+                                                            >
+                                                           {this.typeList}
+                                                        </Select> */}
+                                                    </div>
+
+                                                    {/* WorkOut */}
+                                                </div>
 
                                             </>
                                         )
-                                        
+
                                     })}
 
 

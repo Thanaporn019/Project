@@ -29,6 +29,13 @@ let timeHours = [];
 let timeMin = [];
 
 class ActionsWork extends React.Component {
+    state = {
+        isOpen: false
+    };
+
+    openModal = () => this.setState({ isOpen: true });
+    closeModal = () => this.setState({ isOpen: false });
+
     constructor(props) {
         // console.log("ActionsWork -> constructor -> props", props.match.params.action)
         // let param = useParams();
@@ -242,20 +249,20 @@ class ActionsWork extends React.Component {
     }
 
     handleAddData = () => {
-    console.log("ActionsWork -> handleAddData -> handleAddData")
-    this.state.data.push({
-        projectId: null,
-        typeId: null,
-        workDate: null,
-        workDetail: null,
-        workUrl: null,
-        workManhour: null,
-        workTimeIn: null,
-        workTimeOut: null,
-    })
-    let a = this.state.data
-    this.setState({data: a})
-        console.log("ActionsWork -> handleAddData ->  this.state.data",  this.state.data)
+        console.log("ActionsWork -> handleAddData -> handleAddData")
+        this.state.data.push({
+            projectId: null,
+            typeId: null,
+            workDate: null,
+            workDetail: null,
+            workUrl: null,
+            workManhour: null,
+            workTimeIn: null,
+            workTimeOut: null,
+        })
+        let a = this.state.data
+        this.setState({ data: a })
+        console.log("ActionsWork -> handleAddData ->  this.state.data", this.state.data)
     }
 
     render() {
@@ -268,7 +275,7 @@ class ActionsWork extends React.Component {
                         <Breadcrumb>
                             <Breadcrumb.Item href="/work">
                                 <HomeOutlined />
-                                <span className="breadcrum-custom">  work</span>
+                                <span className="breadcrum-custom">work</span>
                             </Breadcrumb.Item>
                             <Breadcrumb.Item href="#">
                                 {this.props.match.params.action === 'create' ? <span className="breadcrum-custom">  Create</span> : null}
@@ -360,7 +367,7 @@ class ActionsWork extends React.Component {
                                                         <div className="col-4" style={{ textAlign: 'right' }}><label for="txtManHours">Man hours <span style={{ color: 'red' }}>*</span></label></div>
                                                         <input type="text" class="form-control col-3" id="txtManHours" />
                                                         <div class="col-3">
-                                                            <button type="button" class="btn btn-custom-color" style={{ marginRight: 20 }} onClick={this.calManHours}>Calculate Man Hours</button></div>
+                                                            <button type="button" class="btn btn-custom-color" style={{ marginRight: 20 }} onClick={this.calManHours}>Calculate</button></div>
                                                     </div>
 
                                                     {/* Detail */}
@@ -372,7 +379,7 @@ class ActionsWork extends React.Component {
 
                                                     {/* Url */}
                                                     <div className="row form-group">
-                                                        <div className="col-4" style={{ textAlign: 'right' }}><label for="txtUrl">Url <span style={{ color: 'red' }}>*</span></label></div>
+                                                        <div className="col-4" style={{ textAlign: 'right' }}><label for="txtUrl">Url <span style={{ color: 'red' }}></span></label></div>
                                                         <input type="text" class="form-control col-6" id="txtUrl" />
 
                                                     </div>
@@ -389,18 +396,43 @@ class ActionsWork extends React.Component {
                                 </div>
 
                                 <div className="row form-group">
-                                    <div className="col-12" style={{ textAlign: 'center' }}>
-                                        <button type="button" class="btn btn-secondary" style={{ marginRight: 20 }} onClick={this.handleReset}>RESET</button>
-                                        <button type="button" class="btn btn-primary">SEARCH</button>
+                                    <div className="col-12" style={{ textAlign: 'right' }}>
+                                        <button type="button" class="btn btn-secondary" style={{ marginRight: 20 }} onClick={this.handleReset}>CANCEL</button>
+                                        {/* <button type="button" class="btn btn-primary" style={{ marginRight: 80 }}>CREATE</button> */}
+
+                                        <button type="button" class="btn btn-custom-color" style={{ marginRight: 70 }} onClick={this.openModal}>CREATE</button>
+                                        {/* <Button variant="custom" style={{ marginRight: 70 }} onClick={this.openModal}>CREATE
+                     </Button> */}
                                     </div>
+
+                                    <Modal show={this.state.isOpen} onHide={this.closeModal}>
+                                        <Modal.Header closeButton style={{ color: "#bb1717" }}>
+                                            <Modal.Title style={{ padding: "3rem 11rem" }}>Confirm</Modal.Title>
+                                        </Modal.Header>
+                                        <Modal.Body style={{ textAlign: "center" }}>Please confirm your configuration.</Modal.Body>
+
+                                        <Modal.Footer style={{ borderTop: "3px" }} style={{ justifyContent: "center" }}>
+                                            <Button variant="btn btn-secondary" onClick={this.closeModal}>
+                                                ON</Button>
+
+                                            <Button variant="primary" onClick={this.openModal}>
+                                                YES</Button>
+
+                                        </Modal.Footer>
+
+                                    </Modal>
+                                  
+                                   
+                                   
                                 </div>
                             </div>
                         </div>
-
                     </div>
 
                 </div>
+
             </div>
+
         </>
         );
 

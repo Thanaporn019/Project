@@ -47,6 +47,13 @@ const statusesData = [
 
 
 class Work extends React.Component {
+  state = {
+    isOpen: false
+  };
+
+  openModal = () => this.setState({ isOpen: true });
+  closeModal = () => this.setState({ isOpen: false });
+
 
   constructor(props) {
     super(props);
@@ -163,7 +170,8 @@ class Work extends React.Component {
     }, 100);
   }
 
-
+  
+  
   render() {
 
 
@@ -262,7 +270,7 @@ class Work extends React.Component {
                     <div className="row form-group">
                       <div className="col-12" style={{ textAlign: 'center' }}>
                         <button type="button" class="btn btn-secondary" style={{ marginRight: 20 }} onClick={this.handleReset}>RESET</button>
-                        <button type="button" class="btn btn-primary">SEARCH</button>
+                        <button type="button" class="btn btn-custom-color">SEARCH</button>
                       </div>
                     </div>
                   </div>
@@ -277,7 +285,7 @@ class Work extends React.Component {
               <div className="box-search" style={{ padding: 30 }}>
                 <div style={{ textAlign: 'end', padding: 15 }}>
                   <Link to="/work/create">
-                    <Button variant="primary" onClick={this.openModal}><IoAddOutline style={{ width: '16px' }} /> Create Work</Button>
+                    <Button variant="btn btn-custom-color" onClick={this.openModal}><IoAddOutline style={{ width: '16px' }} /> Create Work</Button>
                   </Link>
                 </div>
 

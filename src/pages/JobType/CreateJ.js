@@ -92,28 +92,22 @@ class CreateJ extends Component {
                             <Button variant="primary" onClick={this.openModal}>CREATE
                      </Button>
                   </div>
-
                   <Modal show={this.state.isOpen} onHide={this.closeModal}>
-                    <Modal.Header closeButton>
-                      <Modal.Title style={{ padding: "1rem 11rem" }}>Confirm</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body style={{ textAlign: "center" }}>Please confirm your configuration.</Modal.Body>
+                                        <Modal.Header closeButton style={{ color: "#bb1717" }}>
+                                            <Modal.Title style={{ padding: "3rem 11rem" }}>Confirm</Modal.Title>
+                                        </Modal.Header>
+                                        <Modal.Body style={{ textAlign: "center" }}>Please confirm your configuration.</Modal.Body>
 
-                    <Modal.Footer style={{ borderTop: "0px" }} style={{ justifyContent: "center" }}>
-                      <Button variant="btn btn-secondary" onClick={this.closeModal}>
-                        NO</Button>
-                      {/* <button type="button" class="btn btn-primary" > + Create Job Type </button> */}
-                      {/* <!-- Button trigger modal --> */}
-                      <div>
+                                        <Modal.Footer style={{ borderTop: "3px" }} style={{ justifyContent: "center" }}>
+                                            <Button variant="btn btn-secondary" onClick={this.closeModal}>
+                                                ON</Button>
 
+                                            <Button variant="primary" onClick={this.openModal}>
+                                                YES</Button>
 
+                                        </Modal.Footer>
 
-                        <Button variant="primary" onClick={this.openModal}>
-                          YES</Button>
-                      </div>
-                    </Modal.Footer>
-                  </Modal>
-
+                                    </Modal>
                          
                          
                           {/* </div> */}

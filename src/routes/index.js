@@ -7,8 +7,8 @@ import JobType from '../pages/JobType'
 import Work from '../pages/Work'
 import ActionsWork from '../pages/Work/create-edit-view'
 import actionProject from '../pages/Project/CreateP'
-import actionJobType from '../pages/JobType/CreateJ'
-// import CreateP from '../pages/Project/CreateP'
+import actionJobType from '../pages/JobType/create-edit'
+
 
 export default () => (
   <Switch>
@@ -21,6 +21,6 @@ export default () => (
     <Route exact path="/jobtype/:action?" component={actionJobType} />
     <Route exact path="/work/:action?" render={(props) => <ActionsWork {...props} /> } />
 
-    {/* <Route exact path="/CreateP" component={CreateP} /> */}
+    
   </Switch>
 )

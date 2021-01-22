@@ -16,9 +16,10 @@ export default () => (
     <Route exact path="/jobtype" component={JobType} />
     <Route exact path="/projects" component={Project} />
     <Route exact path="/work" component={Work} />
-    <Route exact path="/work/:action?" component={ActionsWork} />
+    {/* <Route exact path="/work/:action?" component={ActionsWork} /> */}
     <Route exact path="/projects/:action?" component={actionProject} />
     <Route exact path="/jobtype/:action?" component={actionJobType} />
+    <Route exact path="/work/:action?" render={(props) => <ActionsWork {...props} /> } />
 
     {/* <Route exact path="/CreateP" component={CreateP} /> */}
   </Switch>

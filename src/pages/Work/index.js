@@ -14,6 +14,8 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import TreeList, { RemoteOperations, Column, SearchPanel, HeaderFilter, Editing, RequiredRule, Lookup } from 'devextreme-react/tree-list';
 import AspNetData from 'devextreme-aspnet-data-nojquery';
 import _ from "lodash";
+import { Breadcrumb } from 'antd';
+import { HomeOutlined, UserOutlined } from '@ant-design/icons';
 
 
 const url = 'https://js.devexpress.com/Demos/Mvc/api/TreeListTasks';
@@ -150,11 +152,12 @@ class Work extends React.Component {
     console.log("Work -> handleReset -> this.state.filter", this.state.filter)
     this.setState({
       filter: {
-      dateFrom: new Date(),
-      dateTo: new Date(),
-      projectId: null,
-      typeId: null
-    }})
+        dateFrom: new Date(),
+        dateTo: new Date(),
+        projectId: null,
+        typeId: null
+      }
+    })
     setTimeout(() => {
       console.log("Work -> handleReset -> ll", this.state.filter)
     }, 100);
@@ -177,11 +180,13 @@ class Work extends React.Component {
       <div className="App">
         <div id="boxType" className="container-box-content">
           <div className="row wrap-container">
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item" active aria-current="page"><a>Work</a></li>
-              </ol>
-            </nav>
+            <Breadcrumb>
+              <Breadcrumb.Item href="#">
+              <HomeOutlined />
+                <span className="breadcrum-custom">  work</span>
+              </Breadcrumb.Item>
+            </Breadcrumb>
+
             <div className="wrap-content">
               <div className="box-search">
                 <div className="box-title-search">
@@ -215,7 +220,7 @@ class Work extends React.Component {
                             <select class="form-control col-7" id="ddlJobType" value={this.state.filter.typeId} onChange={this.handleTypeChange}>
                               {
                                 this.state.jobtypeList.map(r => {
-                                console.log("Work -> render -> r", r)
+                                  console.log("Work -> render -> r", r)
                                   return <option value={r.typeId} selected={r.typeId == this.state.filter.typeId}>{r.typeName}</option>
                                 })
                               }
@@ -230,8 +235,8 @@ class Work extends React.Component {
                           <div className="row form-group">
                             <div className="col-4"><label for="ddlProjectName">Date : From</label></div>
                             <div className="col-7" style={{ paddingLeft: 0, paddingRight: 0 }}>
-                              <DateBox 
-                              value={this.state.filter.dateFrom}
+                              <DateBox
+                                value={this.state.filter.dateFrom}
                                 type="date" onValueChanged={(e) => {
                                   this.handleChangeDate(e, 'from')
                                 }} />
@@ -245,7 +250,7 @@ class Work extends React.Component {
                               <DateBox value={this.state.filter.dateTo}
                                 type="date" type="date" onValueChanged={(e) => {
                                   this.handleChangeDate(e, 'to')
-                                }}/>
+                                }} />
                             </div>
                           </div>
                         </div>
@@ -269,7 +274,7 @@ class Work extends React.Component {
 
             {/* content start*/}
             <div className="wrap-content">
-              <div className="box-search" style={{padding: 30}}>
+              <div className="box-search" style={{ padding: 30 }}>
                 <div style={{ textAlign: 'end', padding: 15 }}>
                   <Link to="/work/create">
                     <Button variant="primary" onClick={this.openModal}><IoAddOutline style={{ width: '16px' }} /> Create Work</Button>

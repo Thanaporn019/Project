@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Form from "react-bootstrap/Form";
-
-import { NavLink } from 'react-router-dom'
+import { IoPersonCircleOutline } from "react-icons/io5";
+import { NavLink, Link } from 'react-router-dom'
 
 class Head extends Component {
   render() {
     return (
       <>
-        <div class="gx-header-horizontal gx-header-horizontal-dark gx-below-header-horizontal">
+        <div class="gx-header-horizontal gx-header-horizontal-dark gx-below-header-horizontal" style={{position: 'sticky', top: 0, zIndex: 9999}}>
           <header class="ant-layout-header gx-header-horizontal-main">
             <div class="gx-container">
               <div class="gx-header-horizontal-main-flex">
@@ -21,7 +21,7 @@ class Head extends Component {
                         <i class="icon icon-search"></i>
                       </span> */}
 
-                      <span style={{ color: '#fff', fontSize: '22pt' }}>header</span>
+                      <span style={{ color: '#fff', fontSize: '22pt' }}>SMARTADMIN</span>
 
                     </div>
                   </div>
@@ -29,23 +29,29 @@ class Head extends Component {
 
                 <ul class="gx-header-notifications gx-ml-auto">
                   <li class="gx-notify">
+                <Link to="/work" >
                     <span class="gx-pointer gx-d-block">
-                      menu 1
+                      Work
                     </span>
+                </Link>
                   </li>
                   <li class="gx-msg">
+                  <Link to="/project" >
                     <span class="gx-pointer gx-status-pos gx-d-block">
-                      menu 2
+                      Project
                     </span>
+                    </Link>
                   </li>
                   <li class="gx-msg">
+                  <Link to="/jobtype" >
                     <span class="gx-pointer gx-status-pos gx-d-block">
-                      menu 3
+                      Job type
                     </span>
+                    </Link>
                   </li>
-                  <li class="gx-msg">
-                    <span class="gx-pointer gx-status-pos gx-d-block">
-                      menu 4
+                  <li class="gx-msg" style={{color: '#fff'}}>
+                    <span style={{color: '#fff', fontSize: 36}} class="gx-pointer gx-status-pos gx-d-block">
+                    <IoPersonCircleOutline />
                     </span>
                   </li>
                 </ul>
